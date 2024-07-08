@@ -49,13 +49,10 @@ function caseHandler(sign) {
     numbers.length &&
     isNaN(numbers[numbers.length - 1])
   ) {
-    console.log(numbers, "before");
     numbers.pop();
-    console.log(numbers, "after pop");
     numbers.push(sign);
-    console.log(sign);
-    console.log(numbers, "after");
   }
+  
 }
 
 function zeroHandler() {
@@ -71,6 +68,13 @@ num1.addEventListener("click", () => {
   }
   zeroHandler();
   expContainer.value += 1;
+  // if(isNaN(numbers[numbers.length - 1]) && numbers.length) {
+  //   console.log('first')
+  //   console.log(numbers)
+  //   sum = numbers.join(" ")
+  //   const result = math.evaluate(sum)
+  //   expContainer.value = result;
+  // }
 });
 
 num2.addEventListener("click", () => {
@@ -197,13 +201,13 @@ resetBtn.addEventListener("click", () => {
 
 resultBtn.addEventListener("click", (e) => {
   numbers.push(expContainer.value);
-  console.log(numbers)
+  console.log(numbers);
   if (
     numbers[numbers.length - 1] !== "+" &&
     numbers[numbers.length - 1] !== "-" &&
     numbers[numbers.length - 1] !== "/" &&
-    numbers[numbers.length - 1] !== "*" && 
-    numbers[numbers.length - 1] !== "" 
+    numbers[numbers.length - 1] !== "*" &&
+    numbers[numbers.length - 1] !== ""
   ) {
     sum = numbers.join(" ");
     expContainer.value = math.evaluate(sum);
