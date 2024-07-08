@@ -195,7 +195,7 @@ resetBtn.addEventListener("click", () => {
   expContainer.setAttribute("placeholder", "");
 });
 
-resultBtn.addEventListener("click", () => {
+resultBtn.addEventListener("click", (e) => {
   numbers.push(expContainer.value);
   console.log(numbers)
   if (
@@ -213,7 +213,7 @@ resultBtn.addEventListener("click", () => {
   }
 });
 
-delBtn.addEventListener("click", () => {
+delBtn.addEventListener("click", (e) => {
   let currentVal = expContainer.value;
   currentVal = (currentVal / 10) | 0;
   expContainer.value = currentVal;
