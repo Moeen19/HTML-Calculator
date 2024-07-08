@@ -16,6 +16,7 @@ const num0 = document.getElementById("No0");
 const pointBtn = document.getElementById("point");
 const resultBtn = document.getElementById("equals");
 const resetBtn = document.getElementById("reset");
+const delBtn = document.getElementById("DEL");
 
 let numbers = [];
 let sum;
@@ -29,10 +30,6 @@ function caseHandler(sign) {
   currentSign = numbers[numbers.length - 1] === "-" ? "-" : null;
   currentSign = numbers[numbers.length - 1] === "*" ? "*" : null;
   currentSign = numbers[numbers.length - 1] === "/" ? "/" : null;
-  if (currentSign !== sign && numbers.length) {
-    numbers.pop();
-    numbers.push(sign);
-  }
 
   if (numbers[numbers.length - 1] !== sign && expContainer.value !== "") {
     numbers.push(expContainer.value);
@@ -47,82 +44,126 @@ function caseHandler(sign) {
     numbers.push(sign);
     expContainer.value = "";
   }
+  if (
+    currentSign !== sign &&
+    numbers.length &&
+    isNaN(numbers[numbers.length - 1])
+  ) {
+    console.log(numbers, "before");
+    numbers.pop();
+    console.log(numbers, "after pop");
+    numbers.push(sign);
+    console.log(sign);
+    console.log(numbers, "after");
+  }
+}
+
+function zeroHandler() {
+  if (expContainer.value === "0") {
+    expContainer.value = "";
+  }
 }
 
 num1.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
   expContainer.value += 1;
 });
 
 num2.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
   expContainer.value += 2;
 });
 
 num3.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
   expContainer.value += 3;
 });
 
 num4.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
   expContainer.value += 4;
 });
 
 num5.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
   expContainer.value += 5;
 });
 
 num6.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
   expContainer.value += 6;
 });
 
 num7.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
   expContainer.value += 7;
 });
 
 num8.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
+
   expContainer.value += 8;
 });
 
 num9.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
+
   expContainer.value += 9;
 });
 
 num0.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
+
   expContainer.value += 0;
 });
 
 pointBtn.addEventListener("click", () => {
-  if(resetResult) {
-    expContainer.value = ''
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
   }
+  zeroHandler();
+
   expContainer.value += ".";
 });
 
@@ -149,24 +190,31 @@ mulBtn.addEventListener("click", () => {
 });
 
 resetBtn.addEventListener("click", () => {
-  expContainer.value = "";
+  expContainer.value = 0;
   numbers = [];
   expContainer.setAttribute("placeholder", "");
 });
 
 resultBtn.addEventListener("click", () => {
+  numbers.push(expContainer.value);
+  console.log(numbers)
   if (
     numbers[numbers.length - 1] !== "+" &&
     numbers[numbers.length - 1] !== "-" &&
     numbers[numbers.length - 1] !== "/" &&
-    numbers[numbers.length - 1] !== "*"
+    numbers[numbers.length - 1] !== "*" && 
+    numbers[numbers.length - 1] !== "" 
   ) {
-    return;
+    sum = numbers.join(" ");
+    expContainer.value = math.evaluate(sum);
+    console.log(sum);
+    resetResult = true;
+    numbers = [];
   }
-  numbers.push(expContainer.value);
-  sum = numbers.join(" ");
-  expContainer.value = math.evaluate(sum);
-  console.log(sum);
-  resetResult = true;
-  numbers = [];
+});
+
+delBtn.addEventListener("click", () => {
+  let currentVal = expContainer.value;
+  currentVal = (currentVal / 10) | 0;
+  expContainer.value = currentVal;
 });
