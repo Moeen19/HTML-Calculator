@@ -28,8 +28,8 @@ function caseHandler(sign) {
   let currentSign;
   currentSign = numbers[numbers.length - 1] === "+" ? "+" : null;
   currentSign = numbers[numbers.length - 1] === "-" ? "-" : null;
-  currentSign = numbers[numbers.length - 1] === "*" ? "*" : null;
   currentSign = numbers[numbers.length - 1] === "/" ? "/" : null;
+  currentSign = numbers[numbers.length - 1] === "*" ? "*" : null;
 
   if (numbers[numbers.length - 1] !== sign && expContainer.value !== "") {
     numbers.push(expContainer.value);
@@ -44,15 +44,29 @@ function caseHandler(sign) {
     numbers.push(sign);
     expContainer.value = "";
   }
+
   if (
     currentSign !== sign &&
     numbers.length &&
     isNaN(numbers[numbers.length - 1])
   ) {
-    numbers.pop();
-    numbers.push(sign);
+    if(currentSign === '*') {
+      numbers.push(sign)
+    } else if (currentSign === "/") {
+      numbers.push(sign)
+    } else {
+      numbers.pop();
+      numbers.push(sign);
+    }
+    // if (currentSign !== "*" && currentSign !== "/") {
+    // } else if (currentSign === "+") {
+    //   numbers.pop();
+    //   numbers.push(sign);
+    // } else if (currentSign === "-") {
+    //   numbers.pop();
+    //   numbers.push(sign);
+    // }
   }
-  
 }
 
 function zeroHandler() {
