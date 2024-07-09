@@ -238,6 +238,7 @@ resetBtn.addEventListener("click", () => {
   expContainer.value = 0;
   numbers = [];
   expContainer.setAttribute("placeholder", "");
+  preResult.innerText = '';
 });
 
 resultBtn.addEventListener("click", (e) => {
