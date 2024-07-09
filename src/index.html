@@ -6,11 +6,11 @@
     <title>Document</title>
     <link rel="stylesheet" href="./output.css" />
   </head>
-  <body class="bg-gray-700 p-6">
+  <body  class="bg-gray-700 p-6">
     <div
       class="max-w-[400px] p-7 rounded-[16px] min-h-[500px] h-fit inset-0 m-auto w-full bg-black"
     >
-      <div class="mb-[20px]">
+      <div id="#app" style="position: relative;" class="mb-[20px] ">
         <input
           class="bg-white caret-transparent text-right pr-[10px] cursor-default font-semibold text-[20px] focus:outline-none pl-[10px] rounded-[8px] w-full min-h-[60px]"
           id="expContainer"
@@ -19,6 +19,7 @@
           onfocus="this.blur"
           value="0"
         />
+        <p id="preResult" style="color: gray; position: absolute; bottom: 0; right: 0;" class="text-right bottom-0 text-[18px] pr-[10px]"></p>
       </div>
       <div
         class="grid max-w-[400px] gap-[10px] justify-items-center grid-cols-4 w-full min-h-[300px] rounded-[12px] border-red-400"

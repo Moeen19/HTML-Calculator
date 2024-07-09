@@ -19,6 +19,7 @@ const resetBtn = document.getElementById("reset");
 const delBtn = document.getElementById("DEL");
 const leftBracket = document.getElementById("leftBracket");
 const rightBracket = document.getElementById("rightBracket");
+const preResult = document.getElementById("preResult")
 
 let numbers = [];
 let sum;
@@ -76,6 +77,16 @@ function zeroHandler() {
   }
 }
 
+const preResultHandler = () => {
+  if(numbers.length >= 2) {
+    let placeholder = [...numbers]
+    placeholder.push(expContainer.value)
+    sum = placeholder.join(" ")
+    let result = math.evaluate(sum)
+    preResult.innerText = result
+  }
+}
+
 num1.addEventListener("click", () => {
   if (resetResult) {
     expContainer.value = "";
@@ -83,13 +94,7 @@ num1.addEventListener("click", () => {
   }
   zeroHandler();
   expContainer.value += 1;
-  // if(isNaN(numbers[numbers.length - 1]) && numbers.length) {
-  //   console.log('first')
-  //   console.log(numbers)
-  //   sum = numbers.join(" ")
-  //   const result = math.evaluate(sum)
-  //   expContainer.value = result;
-  // }
+  preResultHandler()
 });
 
 num2.addEventListener("click", () => {
@@ -99,6 +104,7 @@ num2.addEventListener("click", () => {
   }
   zeroHandler();
   expContainer.value += 2;
+  preResultHandler()
 });
 
 num3.addEventListener("click", () => {
@@ -108,6 +114,7 @@ num3.addEventListener("click", () => {
   }
   zeroHandler();
   expContainer.value += 3;
+  preResultHandler()
 });
 
 num4.addEventListener("click", () => {
@@ -117,6 +124,7 @@ num4.addEventListener("click", () => {
   }
   zeroHandler();
   expContainer.value += 4;
+  preResultHandler()
 });
 
 num5.addEventListener("click", () => {
@@ -126,6 +134,7 @@ num5.addEventListener("click", () => {
   }
   zeroHandler();
   expContainer.value += 5;
+  preResultHandler()
 });
 
 num6.addEventListener("click", () => {
@@ -135,6 +144,7 @@ num6.addEventListener("click", () => {
   }
   zeroHandler();
   expContainer.value += 6;
+  preResultHandler()
 });
 
 num7.addEventListener("click", () => {
@@ -144,6 +154,7 @@ num7.addEventListener("click", () => {
   }
   zeroHandler();
   expContainer.value += 7;
+  preResultHandler()
 });
 
 num8.addEventListener("click", () => {
@@ -152,8 +163,8 @@ num8.addEventListener("click", () => {
     resetResult = false;
   }
   zeroHandler();
-
   expContainer.value += 8;
+  preResultHandler()
 });
 
 num9.addEventListener("click", () => {
@@ -162,8 +173,8 @@ num9.addEventListener("click", () => {
     resetResult = false;
   }
   zeroHandler();
-
   expContainer.value += 9;
+  preResultHandler()
 });
 
 num0.addEventListener("click", () => {
@@ -172,8 +183,8 @@ num0.addEventListener("click", () => {
     resetResult = false;
   }
   zeroHandler();
-
   expContainer.value += 0;
+  preResultHandler()
 });
 
 pointBtn.addEventListener("click", () => {
@@ -182,8 +193,8 @@ pointBtn.addEventListener("click", () => {
     resetResult = false;
   }
   zeroHandler();
-
   expContainer.value += ".";
+  preResultHandler()
 });
 
 addBtn.addEventListener("click", () => {
@@ -245,11 +256,12 @@ resultBtn.addEventListener("click", (e) => {
     resetResult = true;
     numbers = [];
   }
+  preResult.innerText = ''
 });
 
 delBtn.addEventListener("click", (e) => {
   let currentVal = expContainer.value;
-  currentVal = (currentVal / 10) | 0;
+  currentVal = currentVal.substring(0, currentVal.length - 1);
   expContainer.value = currentVal;
 });
 
