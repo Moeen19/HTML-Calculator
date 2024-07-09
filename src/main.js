@@ -17,6 +17,8 @@ const pointBtn = document.getElementById("point");
 const resultBtn = document.getElementById("equals");
 const resetBtn = document.getElementById("reset");
 const delBtn = document.getElementById("DEL");
+const leftBracket = document.getElementById("leftBracket");
+const rightBracket = document.getElementById("rightBracket");
 
 let numbers = [];
 let sum;
@@ -50,10 +52,9 @@ function caseHandler(sign) {
     numbers.length &&
     isNaN(numbers[numbers.length - 1])
   ) {
-    if(currentSign === '*') {
-      numbers.push(sign)
-    } else if (currentSign === "/") {
-      numbers.push(sign)
+    console.log(currentSign);
+    if (currentSign === "*") {
+      numbers.push(sign);
     } else {
       numbers.pop();
       numbers.push(sign);
@@ -186,24 +187,39 @@ pointBtn.addEventListener("click", () => {
 });
 
 addBtn.addEventListener("click", () => {
-  caseHandler("+");
+  if (expContainer.value.includes("(") && !expContainer.value.includes(")")) {
+    expContainer.value += "+";
+  } else {
+    caseHandler("+");
+  }
   resetResult = false;
   console.log(numbers);
-  // console.log(expContainer.value)
 });
 
 subBtn.addEventListener("click", () => {
-  caseHandler("-");
+  if (expContainer.value.includes("(") && !expContainer.value.includes(")")) {
+    expContainer.value += "-";
+  } else {
+    caseHandler("-");
+  }
   resetResult = false;
 });
 
 divBtn.addEventListener("click", () => {
-  caseHandler("/");
+  if (expContainer.value.includes("(") && !expContainer.value.includes(")")) {
+    expContainer.value += "/";
+  } else {
+    caseHandler("/");
+  }
   resetResult = false;
 });
 
 mulBtn.addEventListener("click", () => {
-  caseHandler("*");
+  if (expContainer.value.includes("(") && !expContainer.value.includes(")")) {
+    expContainer.value += "*";
+  } else {
+    caseHandler("*");
+  }
   resetResult = false;
 });
 
@@ -235,4 +251,26 @@ delBtn.addEventListener("click", (e) => {
   let currentVal = expContainer.value;
   currentVal = (currentVal / 10) | 0;
   expContainer.value = currentVal;
+});
+
+leftBracket.addEventListener("click", () => {
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
+  }
+  zeroHandler();
+
+  expContainer.value += "(";
+});
+
+rightBracket.addEventListener("click", () => {
+  if (resetResult) {
+    expContainer.value = "";
+    resetResult = false;
+  }
+
+  if (expContainer.value.includes("(")) {
+    zeroHandler();
+    expContainer.value += ")";
+  }
 });
